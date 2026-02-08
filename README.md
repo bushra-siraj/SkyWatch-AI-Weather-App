@@ -23,6 +23,9 @@ A professional, interactive weather forecasting dashboard built using Python and
 ## 📜 Author
 **[Bushra]**
 
-**Email:** **[BushraSiraj586@gmail.com]**
-**Github:** **[https://github.com/bushra-siraj]**
-**Linkedin:** **[https://github.com/bushra-siraj]**
+* **Email:** **[BushraSiraj586@gmail.com]**
+* **Github:** **[https://github.com/bushra-siraj]**
+* **Linkedin:** **[https://github.com/bushra-siraj]**
+
+<img width="944" height="442" alt="Screenshot 2026-02-08 223802" src="https://github.com/user-attachments/assets/09f8e6df-b91a-4f00-a3c8-fae91a33adc9" />
+
