@@ -8,6 +8,8 @@ import time
 from datetime import datetime
 from streamlit_lottie import st_lottie
 from plotly import graph_objs as go
+import json
+
 # --- CONFIGURATION ---
 st.set_page_config(page_title="SkyWatch AI", page_icon="🌤️", layout="wide")
 
@@ -25,31 +27,31 @@ def get_forecast(city):
     url = f"http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}&units=metric"
     return requests.get(url).json()
 
-def load_lottieurl(url: str):
-    """Loads a lottie animation from a URL."""
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
+def load_lottieurl(filename: str):
+    base_path = os.path.dirname(__file__)
+    filepath = os.path.join(base_path, filename)
+    
+    with open(filepath, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 # --- LOTTIE ANIMATION MAPPING ---
     
 def get_lottie_for_condition(condition_code):
     # Mapping based on OpenWeatherMap icon codes
     if condition_code in ['01d']: # Clear Sky Day
-        return "https://lottie.host/fbe7a078-f513-489a-b4a6-3faa75300ad3/AtZEG4sQ7S.json"
+        return "animation2.json"
     
     elif condition_code in ['01n']: # Clear Sky Night
-        return "https://lottie.host/592d0859-6a4d-4cc2-851e-d4a56790094d/vjkZJx13qB.json"
+        return "animation5.json"
     
     elif condition_code in ['02d', '02n', '03d', '03n', '04d', '04n']: # All Cloudy types
-        return "https://lottie.host/df927880-a9bb-41bc-806c-cf83dd37d44a/o4WWiYOsJR.json"
+        return "animation4.json"
     
     elif condition_code in ['09d', '09n', '10d', '10n']: # Rain
-        return "https://lottie.host/34ed28ed-6417-4109-b9dc-db107c8748bd/4D7v9r9MBA.json"
+        return "animation1.json"
     
     else: # Default animation
-        return "https://lottie.host/17ff5066-ed15-48da-b12c-bb84cc07c04c/iQibjcEYyR.json"
+        return "animation3.json" # Local fallback animation
     
 # --- UI COMPONENTS ---
 st.title("🌤️ SkyWatch AI Dashboard")
