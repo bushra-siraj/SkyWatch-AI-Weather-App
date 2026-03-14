@@ -2,12 +2,24 @@ name: Keep Streamlit App Awake
 
 on:
   schedule:
-    - cron: '0 12 * * *'
-  workflow_dispatch:
+    - cron: '0 12 * * *' # Runs daily at noon
+  workflow_dispatch:      # Allows you to run it manually
 
 jobs:
-  ping:
+  auto-update:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Streamlit App
-        run: curl -I https://skywatch-ai-weather.streamlit.app/
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Update Timestamp
+        run: |
+          echo "Last keep-awake: $(date)" > ping.txt
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add ping.txt
+          git commit -m "Keep-awake: Daily ping" || exit 0
+          git push
